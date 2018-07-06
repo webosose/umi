@@ -1,0 +1,6 @@
+{
+  "RPI":{
+    "umiAudio":"ALSA",
+    "umiDefaultVolume":"90"
+  }
+}

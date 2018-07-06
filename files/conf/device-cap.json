@@ -1,0 +1,7 @@
+{
+  "audioMasterDefault":{
+    "card":"hw:0",
+    "muteControlName":"PCM Playback Switch",
+    "volumeControlName":"PCM Playback Volume"
+  }
+}
