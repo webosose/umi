@@ -1,4 +1,4 @@
-# Copyright (c) 2018 LG Electronics, Inc.
+# Copyright (c) 2018-2019 LG Electronics, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -75,6 +75,15 @@ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/files/conf/device-cap.json
         ${CMAKE_CURRENT_SOURCE_DIR}/files/conf/umi-config.json
         DESTINATION ${WEBOS_INSTALL_WEBOS_SYSCONFDIR}/umi
         )
+
+unset(${asound_conf} CACHE)
+find_file(
+          asound_conf
+          /etc/asound.conf
+)
+IF(NOT ${asound_conf} STREQUAL ${asound_conf}-NOTFOUND)
+   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/files/conf/asound.conf DESTINATION ${WEBOS_INSTALL_SYSCONFDIR})
+ENDIF()
 
 webos_configure_source_files(SOURCES files/conf/config.h)
 
