@@ -1,4 +1,4 @@
-// Copyright (c) 2018 LG Electronics, Inc.
+// Copyright (c) 2018-2019 LG Electronics, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -101,6 +101,16 @@ UMI_ERROR umiAlsaAudio::resetMixerVolume(UMI_AUDIO_RESOURCE_T audioResourceId, b
         LOG_ERROR(MSGID_SET_VOLUME_ERROR, 0, "Failed to set control %s to %s for card:%s",controlId.c_str(), volumeStr.c_str(), card);
         return UMI_ERROR_FAIL;
     }
+
+    card = mMasterDeviceCapability.getCardName();
+    controlId = "name=";
+    controlId += mMasterDeviceCapability.getMuteControlName();
+
+    if (!setControl(card, controlId, volumeStr))
+    {
+        LOG_ERROR(MSGID_SET_VOLUME_ERROR, 0, "Failed to set control %s to %s for card:%s",controlId.c_str(), volumeStr.c_str(), card.c_str());
+        return UMI_ERROR_FAIL;
+    }
     return UMI_ERROR_NONE;
 }
 
@@ -129,6 +139,14 @@ UMI_ERROR umiAlsaAudio::setOutputMute(UMI_AUDIO_SNDOUT_T outputType, bool mute)
         return UMI_ERROR_FAIL;
     }
 
+    card = mMasterDeviceCapability.getCardName();
+    idstr = "name=";
+    idstr += mMasterDeviceCapability.getMuteControlName();
+    if (!setControl(card, idstr, mutestr))
+    {
+        LOG_ERROR(MSGID_SET_VOLUME_ERROR,0, "Failed to set mute %s for card:%s, control:%s", mutestr.c_str(), card.c_str(), idstr.c_str());
+        return UMI_ERROR_FAIL;
+    }
     return UMI_ERROR_NONE;
 }
 
@@ -154,7 +172,23 @@ bool umiAlsaAudio::setVolume(UMI_AUDIO_VOLUME_T volume)
     volumeToSet += "%";
 
     LOG_DEBUG("In %s, setting volume to %s", __func__, volumeToSet.c_str());
-    return setControl(card, idstr, volumeToSet);
+    if (!setControl(card, idstr, volumeToSet))
+    {
+        LOG_ERROR(MSGID_SET_VOLUME_ERROR, 0, "Failed to set control %s to %s for card:%s",idstr.c_str(), volumeToSet.c_str(), card);
+        return false;
+    }
+
+    card = mMasterDeviceCapability.getCardName();
+    idstr = "name=";
+    idstr += mMasterDeviceCapability.getVolumeControlName();
+
+    if (!setControl(card, idstr, volumeToSet))
+    {
+        LOG_ERROR(MSGID_SET_VOLUME_ERROR, 0, "Failed to set control %s to %s for card:%s",idstr.c_str(), volumeToSet.c_str(), card.c_str());
+        return false;
+    }
+
+    return true;
 }
 
 bool umiAlsaAudio::setControl(string card, string idstr, string controlValue){
