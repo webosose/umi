@@ -174,7 +174,7 @@ bool umiAlsaAudio::setVolume(UMI_AUDIO_VOLUME_T volume)
     LOG_DEBUG("In %s, setting volume to %s", __func__, volumeToSet.c_str());
     if (!setControl(card, idstr, volumeToSet))
     {
-        LOG_ERROR(MSGID_SET_VOLUME_ERROR, 0, "Failed to set control %s to %s for card:%s",idstr.c_str(), volumeToSet.c_str(), card);
+        LOG_ERROR(MSGID_SET_VOLUME_ERROR, 0, "Failed to set control %s to %s for card:%s",idstr.c_str(), volumeToSet.c_str(), card.c_str());
         return false;
     }
 
