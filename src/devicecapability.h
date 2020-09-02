@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2019 LG Electronics, Inc.
+// Copyright (c) 2017-2020 LG Electronics, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -44,9 +44,9 @@ private:
     class AudioDefaults
     {
     public:
-        AudioDefaults():card("default"),
-        muteControlName ("\'Master Playback Switch\'"),
-        volumeControlName("\'Master Playback Volume\'") { }
+        AudioDefaults():card("hw:Headphones"),
+        muteControlName ("\'Headphone Playback Switch\'"),
+        volumeControlName("\'Headphone Playback Volume\'") { }
         ~AudioDefaults(){}
         std::string card;
         std::string muteControlName;
