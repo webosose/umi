@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2018 LG Electronics, Inc.
+// Copyright (c) 2016-2020 LG Electronics, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,11 +39,15 @@ void DeviceCapability::loadDeviceConfig(const std::string& configFilePath)
                   configFilePath.c_str(),configJson.errorString().c_str());
         return;
     }
-        // Parse the value, overriding defaults, so all values are optional.
-    if (configJson.hasKey("audioMasterDefault"))
+
+    JValue categoryObject = configJson[WEBOS_SOC_TYPE];
+    LOG_DEBUG("Value for soc type: %s",WEBOS_SOC_TYPE);
+
+    // Parse the value, overriding defaults, so all values are optional.
+    if (categoryObject.hasKey("audioMasterDefault"))
     {
         LOG_DEBUG("Found audioMasterDefault");
-        parseAudioDefaults(configJson["audioMasterDefault"]);
+        parseAudioDefaults(categoryObject["audioMasterDefault"]);
     }
     else {
         LOG_DEBUG("Did not find  audioMasterDefault");

@@ -44,9 +44,21 @@ private:
     class AudioDefaults
     {
     public:
-        AudioDefaults():card("hw:Headphones"),
-        muteControlName ("\'Headphone Playback Switch\'"),
-        volumeControlName("\'Headphone Playback Volume\'") { }
+        AudioDefaults()
+        {
+            if ("RPI" == WEBOS_SOC_TYPE)
+            {
+                card = "hw:Headphones";
+                muteControlName = "\'Headphone Playback Switch\'";
+                volumeControlName = "\'Headphone Playback Volume\'";
+            }
+            if ("qemux86" == WEBOS_SOC_TYPE)
+            {
+                card = "default";
+                muteControlName = "\'Master Playback Switch\'";
+                volumeControlName = "\'Master Playback Volume\'";
+            }
+        }
         ~AudioDefaults(){}
         std::string card;
         std::string muteControlName;
