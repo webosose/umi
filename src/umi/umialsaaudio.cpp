@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2019 LG Electronics, Inc.
+// Copyright (c) 2018-2020 LG Electronics, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -98,7 +98,7 @@ UMI_ERROR umiAlsaAudio::resetMixerVolume(UMI_AUDIO_RESOURCE_T audioResourceId, b
 
     if (!setControl(card, controlId, volumeStr))
     {
-        LOG_ERROR(MSGID_SET_VOLUME_ERROR, 0, "Failed to set control %s to %s for card:%s",controlId.c_str(), volumeStr.c_str(), card);
+        LOG_ERROR(MSGID_SET_VOLUME_ERROR, 0, "Failed to set control %s to %s for card:%s",controlId.c_str(), volumeStr.c_str(), card.c_str());
         return UMI_ERROR_FAIL;
     }
 
