@@ -2,8 +2,8 @@
   "RPI":{
     "audioMasterDefault":{
       "card":"hw:b1",
-      "muteControlName":"HDMI Playback Switch",
-      "volumeControlName":"HDMI Playback Volume"
+      "muteControlName":"PCM Playback Switch",
+      "volumeControlName":"PCM Playback Volume"
     }
   },
   "qemux86":{

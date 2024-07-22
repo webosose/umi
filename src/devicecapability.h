@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020 LG Electronics, Inc.
+// Copyright (c) 2017-2024 LG Electronics, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49,8 +49,8 @@ private:
             if ("RPI" == WEBOS_SOC_TYPE)
             {
                 card = "hw:Headphones";
-                muteControlName = "\'Headphone Playback Switch\'";
-                volumeControlName = "\'Headphone Playback Volume\'";
+                muteControlName = "\'PCM Playback Switch\'";
+                volumeControlName = "\'PCM Playback Volume\'";
             }
             if ("qemux86" == WEBOS_SOC_TYPE)
             {
